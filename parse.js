@@ -1,14 +1,9 @@
 window.onload=function(){
 	document.getElementById('slackJson').onchange = function(event) {
 	    try {
-	        let files = event.target.files;
-	        if (!files.length) {
-	            alert('No file selected!');
-	            return;
-	        }
-	        let file = files[0];
-	        let reader = new FileReader();
-	        const self = this;
+	        var file = event.target.files[0];
+	        var reader = new FileReader();
+	        reader.readAsText(file);
 	        reader.onload = (event) => {
 	        	var json = JSON.parse(event.target.result);
 	        	var conversation = document.getElementById('conversations');
@@ -32,7 +27,6 @@ window.onload=function(){
 		        	conversation.appendChild(document.createElement('BR'));
 	        	}
 	        };
-	        reader.readAsText(file);
 	    } catch (err) {
 	        console.error(err);
 	    }
